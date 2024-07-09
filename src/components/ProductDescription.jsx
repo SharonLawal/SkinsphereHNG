@@ -58,9 +58,7 @@ const ProductDescription = () => {
         </div>
       </div>
 
-      <p className="flex flex-row ml-24 gap-1 text-blue-400">
-        <img src={back} alt="back" /> Continue Shopping
-      </p>
+      <a href="/" className="text-blue-500">&larr; Continue Shopping</a>
     </div>
   );
 };

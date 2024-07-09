@@ -96,7 +96,7 @@ const Checkout = () => {
       </div>
       </div>
       <div className="flex m-8">
-        <div className="flex-col"><button className="text-blue-500 p-2 mt-4">&larr; Continue Shopping</button></div>
+        <div className="flex-col"><a href="/" className="text-blue-500">&larr; Continue Shopping</a></div>
           <button 
             className="bg-blue-400 text-white p-2 h-16 w-56 rounded-full ml-auto" 
             onClick={handlePayment}
