@@ -1,13 +1,12 @@
-// src/constants/navLinks.js
 export const navLinks = [
   {
     id: "home",
     title: "Home",
-    path: "/", // Navigates to the homepage
+    path: "/",
   },
   {
     id: "products-all",
-    title: "All Products", // This will link to your /products page
+    title: "All Products",
     path: "/products",
   },
   {
@@ -17,7 +16,7 @@ export const navLinks = [
   },
   {
     id: "contact",
-    title: "Contact Us", // Changed from "Contact" to "Contact Us" for consistency
+    title: "Contact Us",
     path: "/contact",
   },
 ];

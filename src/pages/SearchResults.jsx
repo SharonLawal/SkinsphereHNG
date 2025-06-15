@@ -1,14 +1,13 @@
-// src/components/SearchResults.jsx
 import React, { useEffect } from 'react';
 import { useProductContext } from '../constants/ProductContext';
-import ProductCard from '../components/ProductCard'; // Assuming ProductCard is in components
+import ProductCard from '../components/ProductCard';
 
 const SearchResults = () => {
   const { filteredProducts, searchQuery } = useProductContext();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top on component mount
-  }, [searchQuery]); // Re-scroll if search query changes
+    window.scrollTo(0, 0);
+  }, [searchQuery]);
 
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-64px)] animate-fade-in">

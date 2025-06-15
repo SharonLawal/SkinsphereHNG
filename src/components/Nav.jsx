@@ -1,44 +1,40 @@
-// src/components/Nav.jsx (Update this file with search input)
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, ShoppingCart, Search } from 'lucide-react'; // Import Search icon
+import { Menu, X, ShoppingCart, Search } from 'lucide-react';
 import SkinsphereLogo from '../assets/Skinsphere.png';
 import { navLinks } from '../constants/index';
-import { useProductContext } from '../constants/ProductContext'; // Import useProductContext
+import { useProductContext } from '../constants/ProductContext';
 
 const Nav = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { cart, searchQuery, setSearchQuery } = useProductContext(); // Get cart and search state
+  const { cart, searchQuery, setSearchQuery } = useProductContext();
   const navigate = useNavigate();
 
   const totalItemsInCart = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    // Optionally navigate to a search results page immediately
     if (e.target.value && window.location.pathname !== '/search') {
       navigate('/search');
     } else if (!e.target.value && window.location.pathname === '/search') {
-        navigate('/'); // Go back to home if search is cleared on search page
+      navigate('/');
     }
   };
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault();
     if (searchQuery) {
-      navigate('/search'); // Navigate to search results page
+      navigate('/search');
     }
   };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md animate-slide-down">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <img src={SkinsphereLogo} alt="Skinsphere Logo" className="h-8 w-auto" />
         </Link>
 
-        {/* Desktop Navigation */}
         <ul className="hidden md:flex space-x-6 lg:space-x-8">
           {navLinks.map((link) => (
             <li key={link.id}>
@@ -52,7 +48,6 @@ const Nav = () => {
           ))}
         </ul>
 
-        {/* Search Bar (Desktop & Mobile) */}
         <form onSubmit={handleSearchSubmit} className="relative flex items-center max-w-sm flex-grow mx-4">
           <input
             type="text"
@@ -64,7 +59,6 @@ const Nav = () => {
           <Search className="absolute left-3 text-gray-400 w-5 h-5" />
         </form>
 
-        {/* Cart Icon & Mobile Menu Button */}
         <div className="flex items-center space-x-4">
           <Link to="/cart" className="relative text-gray-700 hover:text-blue-500 transition-colors">
             <ShoppingCart className="w-6 h-6" />
@@ -81,7 +75,6 @@ const Nav = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <div className={`md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 transform transition-transform duration-300 ease-in-out ${
         isMobileMenuOpen ? 'translate-y-0 opacity-100 animate-drawer-open-left' : '-translate-y-full opacity-0 animate-drawer-close-left'
       }`}>

@@ -17,7 +17,6 @@ module.exports = {
         "drawer-open-left": "drawer-open-left 0.3s ease-out forwards",
         "drawer-close-left": "drawer-close-left 0.3s ease-in forwards",
         "slide-down": "slide-down 0.4s ease-out forwards",
-        // New animations for this batch:
         "spin-slow": "spin 3s linear infinite",
         "slide-up-fade": "slide-up-fade 0.5s ease-out forwards",
       },
@@ -31,8 +30,7 @@ module.exports = {
         "drawer-open-left": { "0%": { transform: "translateX(-100%)" }, "100%": { transform: "translateX(0)" } },
         "drawer-close-left": { "0%": { transform: "translateX(0)" }, "100%": { transform: "translateX(-100%)" } },
         "slide-down": { "0%": { opacity: "0", transform: "translateY(-10px)" }, "100%": { opacity: "1", transform: "translateY(0)" } },
-        // New keyframes:
-        "spin": { "0%": { transform: "rotate(0deg)" }, "100%": { transform: "rotate(360deg)" } }, // Ensure spin is defined if not already
+        "spin": { "0%": { transform: "rotate(0deg)" }, "100%": { transform: "rotate(360deg)" } },
         "slide-up-fade": { "0%": { opacity: "0", transform: "translateY(10px)" }, "100%": { opacity: "1", transform: "translateY(0)" } },
       },
     },

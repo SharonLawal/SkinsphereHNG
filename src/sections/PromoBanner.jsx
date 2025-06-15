@@ -1,4 +1,3 @@
-// src/sections/PromoBanner.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +12,7 @@ const PromoBanner = () => {
           Sign up for our newsletter and get 15% off your first order!
         </p>
         <Link
-          to="/contact" // Or a dedicated signup page/modal
+          to="/contact"
           className="inline-block bg-white text-blue-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-100 hover:scale-105 transition-all duration-300 ease-in-out animate-pop-in animation-delay-600"
         >
           Sign Up Now

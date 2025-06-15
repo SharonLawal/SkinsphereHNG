@@ -1,4 +1,3 @@
-// src/components/ProductButtonComponent.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,13 +5,12 @@ const ProductButtonComponent = ({ buttonName, isActive, onClick, animationDelay 
   const navigate = useNavigate();
 
   const handleCategoryClick = (category) => {
-    onClick(category); // Update parent's active state
-    // Normalize category name for URL: "Face Oil" -> "FaceOil"
+    onClick(category);
     const pathCategory = category.replace(/\s+/g, '');
     if (category === 'All') {
-      navigate('/products'); // Navigate to a dedicated products page
+      navigate('/products');
     } else {
-      navigate(`/products/${pathCategory}`); // e.g., /products/Cleanser, /products/FaceOil
+      navigate(`/products/${pathCategory}`);
     }
   };
 

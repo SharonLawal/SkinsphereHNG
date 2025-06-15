@@ -1,47 +1,41 @@
-// src/components/ProductDescription.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useProductContext } from '../constants/ProductContext';
-import { Plus, Minus, ShoppingCart, ArrowLeft } from 'lucide-react'; // Using Lucide icons
+import { Plus, Minus, ShoppingCart, ArrowLeft } from 'lucide-react';
 
 const ProductDescription = () => {
   const { id } = useParams();
-  // FIX HERE: Change 'products' to 'allProducts'
-  const { allProducts, addToCart } = useProductContext(); // Get allProducts and addToCart from context
+  const { allProducts, addToCart } = useProductContext();
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(1); // State for product quantity
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Make sure allProducts exists before trying to find
     if (allProducts && allProducts.length > 0) {
       const selectedProduct = allProducts.find((p) => p.id === parseInt(id));
       setProduct(selectedProduct);
-      // If product is not found after initial load, navigate away
       if (!selectedProduct) {
-        navigate('/products'); // Or to a 404 page
+        navigate('/products');
       }
     }
-    window.scrollTo(0, 0); // Scroll to top when component mounts/id changes
-  }, [id, allProducts, navigate]); // Add allProducts and navigate to dependency array
+    window.scrollTo(0, 0);
+  }, [id, allProducts, navigate]);
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart({ ...product, quantity: quantity }); // Add product with selected quantity
-      navigate('/cart'); // Navigate to cart after adding
+      addToCart({ ...product, quantity: quantity });
+      navigate('/cart');
     }
   };
 
   const handleBuyNow = () => {
     if (product) {
-      addToCart({ ...product, quantity: quantity }); // Add product to cart first
-      navigate('/checkout'); // Then navigate to checkout
+      addToCart({ ...product, quantity: quantity });
+      navigate('/checkout');
     }
   };
 
   if (!product) {
-    // Only show loading if allProducts hasn't loaded yet or product is still null
-    // after allProducts is available.
     return (
       <div className="flex justify-center items-center min-h-screen text-xl text-gray-600">
         Loading product details...
@@ -53,7 +47,7 @@ const ProductDescription = () => {
     <div className="container mx-auto p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-64px)] animate-fade-in">
       <div className="mb-6 animate-slide-in-left">
         <button
-          onClick={() => navigate(-1)} // Go back to previous page
+          onClick={() => navigate(-1)}
           className="inline-flex items-center text-blue-500 hover:text-blue-700 transition-colors duration-200 text-lg font-medium"
         >
           <ArrowLeft className="w-5 h-5 mr-2" /> Back to Products
@@ -61,7 +55,6 @@ const ProductDescription = () => {
       </div>
 
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 lg:gap-12 mt-4 bg-white p-6 rounded-xl shadow-lg">
-        {/* Product Image */}
         <div className="flex-shrink-0 w-full md:w-1/2 lg:w-2/5 animate-scale-up">
           <img
             src={product.img}
@@ -71,16 +64,13 @@ const ProductDescription = () => {
           />
         </div>
 
-        {/* Product Details */}
         <div className="flex-grow md:w-1/2 lg:w-3/5 text-center md:text-left animate-slide-in-right">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">{product.name}</h2>
-          {/* Use the product.description field here */}
           <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-6">
             {product.description || 'No description available for this product.'}
           </p>
           <p className="font-bold text-3xl text-blue-600 mb-6">₦{product.price.toLocaleString()}</p>
 
-          {/* Quantity Selector */}
           <div className="flex items-center justify-center md:justify-start mb-8 space-x-4">
             <button
               onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
@@ -99,7 +89,6 @@ const ProductDescription = () => {
             </button>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
             <button
               onClick={handleAddToCart}

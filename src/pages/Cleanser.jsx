@@ -1,4 +1,3 @@
-// src/components/Cleanser.jsx
 import React from 'react';
 import ProductCard from '../components/ProductCard';
 import { getProductsByCategory } from '../constants/ProductData';
@@ -14,4 +13,4 @@ const Cleanser = () => {
   );
 };
 
-export default Cleanser; // Export Cleanser as named export
+export default Cleanser;

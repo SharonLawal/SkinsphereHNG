@@ -1,36 +1,32 @@
-// src/pages/ContactUs.jsx
-import React, { useEffect, useState } from 'react'; // Import useState
-import { Mail, Phone, MapPin } from 'lucide-react'; // Example icons
+import React, { useEffect, useState } from 'react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const ContactUs = () => {
-  const [submissionMessage, setSubmissionMessage] = useState(''); // State for submission message
-  const [isSuccess, setIsSuccess] = useState(false); // State to track success/failure
+  const [submissionMessage, setSubmissionMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top on page load
+    window.scrollTo(0, 0);
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic form validation (browser's 'required' handles most of it)
     if (!e.target.checkValidity()) {
       setSubmissionMessage('Please fill in all required fields.');
       setIsSuccess(false);
       return;
     }
 
-    // --- Instead of window.alert(), set state for inline message ---
     setSubmissionMessage('Message sent successfully! We\'ll get back to you soon.');
     setIsSuccess(true);
 
-    e.target.reset(); // Clear the form
+    e.target.reset();
 
-    // Optionally, clear the message after a few seconds
     setTimeout(() => {
       setSubmissionMessage('');
       setIsSuccess(false);
-    }, 5000); // Message disappears after 5 seconds
+    }, 5000);
   };
 
   return (
@@ -38,7 +34,6 @@ const ContactUs = () => {
       <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-8 text-center animate-slide-down">Contact Us</h1>
 
       <div className="flex flex-col lg:flex-row gap-8 items-start justify-center">
-        {/* Contact Information */}
         <div className="lg:w-1/3 bg-white p-8 rounded-lg shadow-md animate-slide-in-left">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">Get in Touch</h2>
           <div className="space-y-4 text-gray-700">
@@ -60,7 +55,6 @@ const ContactUs = () => {
           </p>
         </div>
 
-        {/* Contact Form */}
         <div className="lg:w-2/3 bg-white p-8 rounded-lg shadow-md animate-slide-in-right">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">Send Us a Message</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -78,7 +72,6 @@ const ContactUs = () => {
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-              {/* REMOVED 'rounded-full' or similar classes if they were there in form-input for textarea */}
               <textarea id="message" name="message" rows="3" className="form-input" placeholder="Your message here..." required></textarea>
             </div>
             <button
@@ -88,7 +81,6 @@ const ContactUs = () => {
               Send Message
             </button>
 
-            {/* Submission Message Display */}
             {submissionMessage && (
               <p className={`mt-4 text-center font-medium ${isSuccess ? 'text-green-600' : 'text-red-600'} animate-fade-in`}>
                 {submissionMessage}

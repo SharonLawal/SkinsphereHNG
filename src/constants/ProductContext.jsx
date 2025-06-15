@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { allProducts as initialAllProducts } from '../constants/ProductData'; // Assuming productsData.js exports allProducts
+import { allProducts as initialAllProducts } from '../constants/ProductData';
 
 const ProductContext = createContext();
 
@@ -7,11 +7,10 @@ export const useProductContext = () => useContext(ProductContext);
 
 export const ProductProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [allProducts, setAllProducts] = useState(initialAllProducts); // Keep all products here
-  const [filteredProducts, setFilteredProducts] = useState(initialAllProducts); // State for search results
-  const [searchQuery, setSearchQuery] = useState(''); // State for the search input
+  const [allProducts] = useState(initialAllProducts);
+  const [filteredProducts, setFilteredProducts] = useState(initialAllProducts);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // --- Cart Management Functions (Keep your existing ones) ---
   const addToCart = (productToAdd) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === productToAdd.id);
@@ -35,7 +34,7 @@ export const ProductProvider = ({ children }) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
-      ).filter(item => item.quantity > 0) // Remove if quantity drops to 0
+      ).filter(item => item.quantity > 0)
     );
   };
 
@@ -43,7 +42,6 @@ export const ProductProvider = ({ children }) => {
     setCart([]);
   };
 
-  // --- Search Filtering Logic ---
   useEffect(() => {
     if (searchQuery) {
       const lowerCaseQuery = searchQuery.toLowerCase();
@@ -53,9 +51,9 @@ export const ProductProvider = ({ children }) => {
       );
       setFilteredProducts(results);
     } else {
-      setFilteredProducts(initialAllProducts); // Show all products if search query is empty
+      setFilteredProducts(initialAllProducts);
     }
-  }, [searchQuery, initialAllProducts]); // Dependency array: re-run when searchQuery or initialAllProducts changes
+  }, [searchQuery, initialAllProducts]);
 
   return (
     <ProductContext.Provider
@@ -65,10 +63,10 @@ export const ProductProvider = ({ children }) => {
         removeFromCart,
         updateCartQuantity,
         clearCart,
-        allProducts,       // Expose allProducts for initial display/filtering
-        filteredProducts,  // Expose filtered results
-        searchQuery,       // Expose search query
-        setSearchQuery,    // Expose setter for search query
+        allProducts,
+        filteredProducts,
+        searchQuery,
+        setSearchQuery,
       }}
     >
       {children}

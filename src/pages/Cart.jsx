@@ -1,12 +1,11 @@
-// src/components/Cart.jsx
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useProductContext } from '../constants/ProductContext'; // Import ProductContext
-import CartItem from '../components/CartItem'; // Ensure this path is correct if CartItem is in components
-import { ChevronLeft } from 'lucide-react'; // For the 'continue shopping' icon
+import { useProductContext } from '../constants/ProductContext';
+import CartItem from '../components/CartItem';
+import { ChevronLeft } from 'lucide-react';
 
 const Cart = () => {
-  const { cart, removeFromCart, updateCartQuantity } = useProductContext(); // Get cart state and functions from context
+  const { cart, removeFromCart, updateCartQuantity } = useProductContext();
   const navigate = useNavigate();
 
   const handleCheckout = () => {
@@ -16,13 +15,12 @@ const Cart = () => {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // Example for fixed shipping and tax (you might make these dynamic later)
   const shippingCost = 5000;
   const taxCost = 600;
   const grandTotal = subtotal + shippingCost + taxCost;
 
   return (
-    <div className="container mx-auto p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-64px)] animate-fade-in"> {/* Adjusted padding and min-height for better layout */}
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-64px)] animate-fade-in">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8">
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 sm:mb-0">Your Shopping Cart</h1>
         <h2 className="text-xl text-gray-600">
@@ -42,12 +40,11 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          {/* Table Headers for larger screens */}
           <div className="hidden md:flex justify-between items-center text-neutral-500 text-base font-semibold border-b pb-3 px-2">
             <p className="flex-1">Product Details</p>
-            <div className="flex justify-end flex-1 gap-x-10 lg:gap-x-16 xl:gap-x-20 pr-16"> {/* Adjusted gap for headers */}
-                <p>Quantity</p>
-                <p>Total</p>
+            <div className="flex justify-end flex-1 gap-x-10 lg:gap-x-16 xl:gap-x-20 pr-16">
+              <p>Quantity</p>
+              <p>Total</p>
             </div>
           </div>
 
@@ -59,7 +56,7 @@ const Cart = () => {
                 onRemove={removeFromCart}
                 onIncreaseQuantity={() => updateCartQuantity(item.id, item.quantity + 1)}
                 onDecreaseQuantity={() => updateCartQuantity(item.id, item.quantity - 1)}
-                animationDelay={index * 0.05} // Staggered animation
+                animationDelay={index * 0.05}
               />
             ))}
           </div>

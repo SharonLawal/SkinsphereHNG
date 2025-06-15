@@ -1,12 +1,10 @@
-// src/sections/FeaturedProducts.jsx
 import React from 'react';
-import ProductCard from '../components/ProductCard'; // Reuse your ProductCard
-import { allProducts } from '../constants/ProductData'; // Import all products
+import ProductCard from '../components/ProductCard';
+import { allProducts } from '../constants/ProductData';
 import { Link } from 'react-router-dom';
 
 const FeaturedProducts = () => {
-  // Select a few products to feature (e.g., first 4 or 8)
-  const featured = allProducts.slice(0, 4); // Adjust as needed
+  const featured = allProducts.slice(0, 4);
 
   return (
     <section className="container mx-auto px-4 py-16 animate-fade-in">

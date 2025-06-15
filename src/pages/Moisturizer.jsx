@@ -1,4 +1,3 @@
-// src/components/Moisturizer.jsx
 import React from 'react';
 import ProductCard from '../components/ProductCard';
 import { getProductsByCategory } from '../constants/ProductData';

@@ -1,4 +1,3 @@
-// src/components/Checkout.jsx
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useProductContext } from '../constants/ProductContext';
@@ -9,29 +8,22 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { cart, clearCart } = useProductContext();
 
-  // --- Define calculations here, before the return statement ---
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  const shippingCost = subtotal > 0 ? 2500 : 0; // Example shipping cost
-  const taxRate = 0.07; // Example 7% tax rate
+  const shippingCost = subtotal > 0 ? 2500 : 0;
+  const taxRate = 0.07;
   const calculatedTax = subtotal * taxRate;
   const grandTotal = subtotal + shippingCost + calculatedTax;
-  // --- End of calculations ---
 
   const handlePayment = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     const form = e.target;
     if (!form.checkValidity()) {
-      form.reportValidity(); // Show browser's validation messages
-      return; // Stop if form is invalid
+      form.reportValidity();
+      return;
     }
 
-    // Simulate payment processing
-    console.log("Processing payment...");
-    // In a real app, you'd send data to a backend here.
-
-    clearCart(); // Clear cart after successful checkout
+    clearCart();
     navigate('/payment');
   };
 
@@ -39,7 +31,7 @@ const Checkout = () => {
     <div className="container mx-auto p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-64px)] animate-fade-in">
       <div className="mb-6 animate-slide-in-left">
         <button
-          onClick={() => navigate('/cart')} // Go back to cart
+          onClick={() => navigate('/cart')}
           className="inline-flex items-center text-blue-500 hover:text-blue-700 transition-colors duration-200 text-lg font-medium"
         >
           <ChevronLeft className="w-5 h-5 mr-2" /> Back to Cart
@@ -50,7 +42,6 @@ const Checkout = () => {
         Checkout
       </h1>
 
-      {/* The main form that handles submission */}
       <form onSubmit={handlePayment} className="flex flex-col lg:flex-row justify-center gap-8">
         <div className="lg:w-1/2 p-6 bg-white rounded-lg shadow-md animate-slide-in-left">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">Customer Information</h2>
@@ -103,7 +94,6 @@ const Checkout = () => {
           </div>
         </div>
 
-        {/* Order Summary and the "Proceed to Pay" button */}
         <div className="lg:w-1/3 p-6 bg-white rounded-lg shadow-md animate-slide-in-right h-fit sticky top-24">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">Order Summary</h2>
           <div className="space-y-4 mb-8">
@@ -142,9 +132,8 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* This is the "Proceed to Pay" button, now correctly placed inside the form */}
           <button
-            type="submit" // This makes the button submit the form
+            type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 mt-8 rounded-full shadow-lg transition-all duration-300 text-lg font-semibold animate-pulse-subtle"
           >
             Proceed to Pay
@@ -152,7 +141,6 @@ const Checkout = () => {
         </div>
       </form>
 
-      {/* This div is outside the form, for the "Continue Shopping" link */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-8 pt-4 border-t border-gray-200">
         <Link
           to="/"
@@ -160,7 +148,6 @@ const Checkout = () => {
         >
           <ChevronLeft className="w-5 h-5 mr-1" /> Continue Shopping
         </Link>
-        {/* Removed the redundant "Proceed to Pay" button from here */}
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
-// src/components/CartItem.jsx
 import React from 'react';
-import { Plus, Minus, XCircle } from 'lucide-react'; // Using Lucide icons for quantity and remove
+import { Plus, Minus, XCircle } from 'lucide-react';
 
 const CartItem = ({ item, onRemove, onIncreaseQuantity, onDecreaseQuantity }) => {
   return (
@@ -14,13 +13,11 @@ const CartItem = ({ item, onRemove, onIncreaseQuantity, onDecreaseQuantity }) =>
         />
         <div className="text-center sm:text-left">
           <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
-          {/* Display price on all screens, adjust responsiveness */}
           <p className="text-gray-600 text-sm mt-1">N{item.price.toLocaleString()}</p>
         </div>
       </div>
 
       <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
-        {/* Quantity Controls */}
         <div className="flex items-center bg-gray-100 rounded-full px-3 py-1 border border-gray-300">
           <button
             onClick={() => onDecreaseQuantity(item.id)}
@@ -39,12 +36,10 @@ const CartItem = ({ item, onRemove, onIncreaseQuantity, onDecreaseQuantity }) =>
           </button>
         </div>
 
-        {/* Total Price for item */}
         <span className="font-bold text-gray-900 text-lg sm:min-w-[100px] text-right">
           N{(item.price * item.quantity).toLocaleString()}
         </span>
 
-        {/* Remove Button */}
         <button
           onClick={() => onRemove(item.id)}
           className="ml-4 text-red-500 hover:text-red-700 transition-colors duration-200"

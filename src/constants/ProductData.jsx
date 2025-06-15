@@ -1,4 +1,3 @@
-// src/components/productsData.js
 import img3 from '../assets/img3.png';
 import img4 from '../assets/img4.png';
 import img5 from '../assets/img5.png';
@@ -13,7 +12,7 @@ import img12 from '../assets/img12.png';
 export const allProducts = [
   {
     id: 1,
-    img: img3,
+    image: img3,
     name: 'Radiant Glow Serum',
     price: 52000,
     category: 'Serum',
@@ -21,7 +20,7 @@ export const allProducts = [
   },
   {
     id: 2,
-    img: img4,
+    image: img4,
     name: 'Hydrating Face Cleanser',
     price: 48000,
     category: 'Cleanser',
@@ -29,7 +28,7 @@ export const allProducts = [
   },
   {
     id: 3,
-    img: img7,
+    image: img7,
     name: 'Anti-Aging Elixir',
     price: 65000,
     category: 'Serum',
@@ -37,7 +36,7 @@ export const allProducts = [
   },
   {
     id: 4,
-    img: img8,
+    image: img8,
     name: 'Gentle Foaming Wash',
     price: 45000,
     category: 'Cleanser',
@@ -45,7 +44,7 @@ export const allProducts = [
   },
   {
     id: 5,
-    img: img9,
+    image: img9,
     name: 'Deep Moisture Cream',
     price: 55000,
     category: 'Moisturizer',
@@ -53,7 +52,7 @@ export const allProducts = [
   },
   {
     id: 6,
-    img: img10,
+    image: img10,
     name: 'Balancing Face Oil',
     price: 60000,
     category: 'Face Oil',
@@ -61,7 +60,7 @@ export const allProducts = [
   },
   {
     id: 7,
-    img: img11,
+    image: img11,
     name: 'Brightening Vitamin C Serum',
     price: 70000,
     category: 'Serum',
@@ -69,7 +68,7 @@ export const allProducts = [
   },
   {
     id: 8,
-    img: img12,
+    image: img12,
     name: 'Pore Refining Cleanser',
     price: 47000,
     category: 'Cleanser',
@@ -77,7 +76,7 @@ export const allProducts = [
   },
   {
     id: 9,
-    img: img3,
+    image: img3,
     name: 'Nourishing Night Cream',
     price: 58000,
     category: 'Moisturizer',
@@ -85,7 +84,7 @@ export const allProducts = [
   },
   {
     id: 10,
-    img: img4,
+    image: img4,
     name: 'Soothing Facial Oil',
     price: 62000,
     category: 'Face Oil',
@@ -93,7 +92,7 @@ export const allProducts = [
   },
   {
     id: 11,
-    img: img5,
+    image: img5,
     name: 'Daily Defense SPF',
     price: 50000,
     category: 'Moisturizer',
@@ -101,7 +100,7 @@ export const allProducts = [
   },
   {
     id: 12,
-    img: img6,
+    image: img6,
     name: 'Acne Control Cleanser',
     price: 49000,
     category: 'Cleanser',

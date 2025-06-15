@@ -1,9 +1,8 @@
-// src/pages/AboutUs.jsx
 import React, { useEffect } from 'react';
 
 const AboutUs = () => {
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top on page load
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -18,7 +17,6 @@ const AboutUs = () => {
         Founded in 2023, Skinsphere has grown from a passion for natural beauty into a brand committed to
         delivering effective and gentle solutions for all. Explore our range and join our community!
       </p>
-      {/* You can add more sections, team photos, values etc. */}
     </div>
   );
 };

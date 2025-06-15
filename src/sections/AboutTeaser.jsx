@@ -1,7 +1,6 @@
-// src/sections/AboutTeaser.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import skinsphereFullLogo from '../assets/Skinsphere.png'; // Assuming you have a full logo for this section
+import skinsphereFullLogo from '../assets/Skinsphere.png';
 
 const AboutTeaser = () => {
   return (
