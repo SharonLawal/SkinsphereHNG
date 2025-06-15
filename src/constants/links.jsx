@@ -1,24 +1,42 @@
-// Links.jsx
+// src/components/Links.jsx
 import React from 'react';
 import skinsphere from '../assets/Skinsphere.png';
-import BackButton from './BackButton'; // Import the BackButton component
+import BackButton from './BackButton';
+import { navLinks } from './index'; // Import navLinks
+import { Link } from 'react-router-dom'; // Use Link for internal navigation
 
 const Links = () => {
   return (
-    <div className="w-screen">
-      <div className="flex flex-col items-center font-bold text-center gap-9 px-4 sm:px-6 lg:px-8 py-16">
-        <div className="self-start ml-4">
-          <BackButton /> {/* Add the BackButton */}
-        </div>
-        <img src={skinsphere} alt="Skin Sphere" className="mb-8" />
+    <div className="min-h-screen flex flex-col items-center justify-start py-12 px-4 bg-gray-50 text-gray-800 animate-fade-in">
+      {/* Back Button */}
+      <div className="self-start ml-4 sm:ml-8 lg:ml-12 mb-8 animate-slide-in-left">
+        <BackButton />
       </div>
-    
-      <div className="flex flex-col items-center font-bold text-center">
-        <div className="flex flex-col sm:flex-row gap-6 items-center w-full justify-center">
-          <a href="/" className="hover:text-gray-500 border-b sm:border-r sm:border-b-0 border-black border-b-2 py-2 sm:py-0 sm:px-6 w-screen sm:w-auto text-center">Store</a>
-          <a href="/cart" className="hover:text-gray-500 border-b sm:border-r sm:border-b-0 border-black border-b-2 py-2 sm:py-0 sm:px-6 w-screen sm:w-auto text-center">Cart</a>
-          <a href="/about" className="hover:text-gray-500 border-b sm:border-r sm:border-b-0 border-black border-b-2 py-2 sm:py-0 sm:px-6 w-screen sm:w-auto text-center">About</a>
-        </div>
+
+      {/* Logo */}
+      <img
+        src={skinsphere}
+        alt="Skin Sphere Logo"
+        className="mb-12 w-48 sm:w-64 animate-pop-in animation-delay-200"
+      />
+
+      {/* Navigation Links */}
+      <nav className="flex flex-col items-center w-full max-w-sm sm:max-w-md animate-slide-down animation-delay-400">
+        {navLinks.map((link, index) => (
+          <Link
+            key={index}
+            to={link.href}
+            className="w-full text-center py-4 border-b-2 border-gray-300 last:border-b-0 text-xl font-semibold hover:bg-gray-100 hover:text-blue-600 transition-all duration-300 ease-in-out animate-slide-down"
+            style={{ animationDelay: `${0.4 + index * 0.1}s` }} // Staggered animation
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+
+      {/* Add a subtle footer or copyright if needed */}
+      <div className="mt-auto pt-16 text-sm text-gray-500 animate-fade-in animation-delay-1000">
+        &copy; {new Date().getFullYear()} Skinsphere. All rights reserved.
       </div>
     </div>
   );

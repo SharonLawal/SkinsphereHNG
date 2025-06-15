@@ -1,63 +1,84 @@
+/* src/index.css */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Palanquin:wght@100;200;300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Palanquin:wght@100;200;300;400;500;600;700&display=swap");
+/* Assuming 'Petrona' is intended if 'Plaster' isn't used */
+@import url('https://fonts.googleapis.com/css2?family=Petrona:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Base styles for the entire application */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-  }
-/* index.css */
-
-body {
-  font-family: 'Petrona', serif;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
+body {
+  font-family: 'Petrona', serif; /* Ensure Petrona is correctly imported and used */
+  overflow-x: hidden; /* Prevent horizontal scroll due to animations or overflow */
+  color: #333; /* Default text color for better contrast */
+}
+
+/* Custom font utility if you plan to use 'Plaster' */
 .font-plaster {
   font-family: 'Plaster', cursive;
 }
-  
-  @layer components {
-    .input {
-      @apply sm:flex-1 max-sm:w-full text-base leading-normal pl-5 max-sm:p-5 outline-none sm:border-none border max-sm:rounded-full;
-    }
+
+/* --- Animations --- */
+/* Add custom CSS for animation delays if 'tailwindcss-animate' doesn't cover specific needs */
+/* You can define these in your tailwind.config.js keyframes as well,
+   but for simple delays, sometimes direct CSS is quicker or helpful for overrides. */
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-700 { animation-delay: 0.7s; }
+.animation-delay-800 { animation-delay: 0.8s; }
+.animation-delay-900 { animation-delay: 0.9s; }
+.animation-delay-1000 { animation-delay: 1s; }
+
+@layer components {
+  /* Renamed 'input' to 'form-input' to avoid conflicts and be more specific */
+  .form-input {
+    @apply sm:flex-1 w-full text-base leading-normal pl-5 pr-5 py-3 outline-none border border-zinc-300 rounded-full focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300;
   }
-  
-  @layer utilities {
-    .padding {
-      @apply sm:px-16 px-8 sm:py-24 py-12;
-    }
-  
-    .padding-x {
-      @apply sm:px-16 px-8;
-    }
-  
-    .padding-y {
-      @apply sm:py-24 py-12;
-    }
-  
-    .padding-l {
-      @apply sm:pl-16 pl-8;
-    }
-  
-    .padding-r {
-      @apply sm:pr-16 pr-8;
-    }
-  
-    .padding-t {
-      @apply sm:pt-24 pt-12;
-    }
-  
-    .padding-b {
-      @apply sm:pb-24 pb-12;
-    }
-  
-    .info-text {
-      @apply font-montserrat text-slate-gray text-lg leading-7;
-    }
+}
+
+@layer utilities {
+  /* Existing padding utilities */
+  .padding {
+    @apply sm:px-16 px-8 sm:py-24 py-12;
   }
+
+  .padding-x {
+    @apply sm:px-16 px-8;
+  }
+
+  .padding-y {
+    @apply sm:py-24 py-12;
+  }
+
+  .padding-l {
+    @apply sm:pl-16 pl-8;
+  }
+
+  .padding-r {
+    @apply sm:pr-16 pr-8;
+  }
+
+  .padding-t {
+    @apply sm:pt-24 pt-12;
+  }
+
+  .padding-b {
+    @apply sm:pb-24 pb-12;
+  }
+
+  .info-text {
+    @apply font-montserrat text-slate-gray text-lg leading-7;
+  }
+}

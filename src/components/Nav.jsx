@@ -1,73 +1,105 @@
+// src/components/Nav.jsx (Update this file with search input)
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom'; // Import NavLink and useNavigate
-import cartImage from '../assets/Cart.png';
-import S from '../assets/S.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, X, ShoppingCart, Search } from 'lucide-react'; // Import Search icon
+import SkinsphereLogo from '../assets/Skinsphere.png';
+import { navLinks } from '../constants/index';
+import { useProductContext } from '../constants/ProductContext'; // Import useProductContext
 
 const Nav = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate hook
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { cart, searchQuery, setSearchQuery } = useProductContext(); // Get cart and search state
+  const navigate = useNavigate();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    // Lock scrolling when menu is open
-    if (!isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
+  const totalItemsInCart = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    // Optionally navigate to a search results page immediately
+    if (e.target.value && window.location.pathname !== '/search') {
+      navigate('/search');
+    } else if (!e.target.value && window.location.pathname === '/search') {
+        navigate('/'); // Go back to home if search is cleared on search page
     }
   };
 
-  // Function to navigate to Links page
-  const goToLinks = () => {
-    navigate('/links'); // Navigate to the Links page route
-    setIsOpen(false); // Close the menu after navigation
-    document.body.style.overflow = 'auto'; // Restore scrolling
+  const handleSearchSubmit = (e) => {
+    e.preventDefault(); // Prevent page reload
+    if (searchQuery) {
+      navigate('/search'); // Navigate to search results page
+    }
   };
 
   return (
-    <>
-      {/* Navigation Menu */}
-      <nav className="bg-white shadow-lg w-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex-shrink-0">
-              <img src={S} alt="Logo" className="h-8" />
-            </div>
+    <header className="sticky top-0 z-50 bg-white shadow-md animate-slide-down">
+      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2">
+          <img src={SkinsphereLogo} alt="Skinsphere Logo" className="h-8 w-auto" />
+        </Link>
 
-            {/* Desktop Menu Links */}
-            <div className="hidden lg:flex lg:items-center lg:ml-10">
-              <NavLink to="/" className="hover:text-gray-300" activeClassName="text-blue-500">Store</NavLink>
-              <NavLink to="/about" className="ml-4 hover:text-gray-300" activeClassName="text-blue-500">About</NavLink>
-              <NavLink to="/contact" className="ml-4 hover:text-gray-300" activeClassName="text-blue-500">Contact</NavLink>
-            </div>
-
-            <div className="hidden lg:block">
-              <button className="bg-blue-400 w-20 h-12 py-3 px-6 rounded-2xl">
-                <img src={cartImage} alt="Cart" />
-              </button>
-            </div>
-
-            {/* Hamburger Menu Button - Mobile/Tab View */}
-            <div className="-mr-2 flex lg:hidden">
-              <button
-                onClick={goToLinks} // Directly navigate to Links.jsx
-                className="inline-flex p-2 text-black focus:outline-none focus:text-black"
-                aria-label="Toggle menu"
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex space-x-6 lg:space-x-8">
+          {navLinks.map((link) => (
+            <li key={link.id}>
+              <Link
+                to={link.path}
+                className="text-gray-700 hover:text-blue-500 font-medium transition-colors duration-200"
               >
-                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
-          </div>
+                {link.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Search Bar (Desktop & Mobile) */}
+        <form onSubmit={handleSearchSubmit} className="relative flex items-center max-w-sm flex-grow mx-4">
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-200 text-sm"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+          <Search className="absolute left-3 text-gray-400 w-5 h-5" />
+        </form>
+
+        {/* Cart Icon & Mobile Menu Button */}
+        <div className="flex items-center space-x-4">
+          <Link to="/cart" className="relative text-gray-700 hover:text-blue-500 transition-colors">
+            <ShoppingCart className="w-6 h-6" />
+            {totalItemsInCart > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {totalItemsInCart}
+              </span>
+            )}
+          </Link>
+
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-gray-700 hover:text-blue-500">
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </nav>
 
-      {/* Main Content (Only Menu Links and Footer) */}
-      <main className={`lg:flex ${isOpen ? "hidden" : "flex"}`}>
-        {/* Insert your main content here */}
-      </main>
-    </>
+      {/* Mobile Menu */}
+      <div className={`md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 transform transition-transform duration-300 ease-in-out ${
+        isMobileMenuOpen ? 'translate-y-0 opacity-100 animate-drawer-open-left' : '-translate-y-full opacity-0 animate-drawer-close-left'
+      }`}>
+        <ul className="flex flex-col items-center space-y-4">
+          {navLinks.map((link) => (
+            <li key={link.id}>
+              <Link
+                to={link.path}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-gray-700 hover:text-blue-500 font-medium text-lg block py-2"
+              >
+                {link.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </header>
   );
 };
 
